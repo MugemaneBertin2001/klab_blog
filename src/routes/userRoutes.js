@@ -2,7 +2,6 @@ import express from "express";
 import fileUpload from "../helper/multer";
 import { getUsers, signup, updateUser, userLogin, deleteUser } from "../controllers/userController";
 import Authorization  from "../middleware/Aunthentication"
-import userAunthentication from "../middleware/userAunthentication";
 
 const userRoutes = express.Router();
 userRoutes.post("/signup", fileUpload.single("profile"), signup);
