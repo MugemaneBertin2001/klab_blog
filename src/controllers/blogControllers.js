@@ -27,7 +27,7 @@ export const createBlog = async (req,res) => {
             subheader,
             content,
             blogImage: result?.secure_url,
-            author:req._id
+            author:req.users._id
         });
         return res.status(201).json({
             status: "201",
@@ -47,7 +47,7 @@ export const createBlog = async (req,res) => {
 
 export const selectBlog = async (req, res) => {
     try {
-      const getBlog = await blog.find().populate({path:'comments', select: 'content author'}).populate({path:'author',model: 'user', select: 'first lastname profile'});
+      const getBlog = await blog.find().populate({path:'comments', populate:{path:'author',select:'first lastname'}}).populate({path:'author', select: 'first lastname profile'});
       return res.status(200).json({
         status: "Success",
         message: "Data Retrieved Successfully",
@@ -184,6 +184,7 @@ export const addComment = async (req,res) =>{
           blogId:id,
           content: req.body.content,
           author: req.users._id, // Assuming you have an authenticated user
+
         });
     
         // Find the corresponding blog post

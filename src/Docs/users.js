@@ -283,40 +283,6 @@
 
 /**
  * @swagger
- * /api/blog/comment/:id:
- *   put:
- *     tags:
- *       - Blog
- *     summary: This end point help to add comment to created blog 
- *     consumes:
- *       - multipart/form-data
- *     requestBody:
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               id:
- *                 type: string
- *                 description: comment added to blog
- *               comment:
- *                 type: string
- *                 description: comment added to blog
- *           required:
- *             - comment
- *     responses:
- *       200:
- *         description: comment added successfully
- *       400:
- *         description: Bad request
- *       500:
- *         description: Internal server error
- *       404: 
- *          description: Blog not found
- */
-
-/**
- * @swagger
  * /api/blog/update/{id}:
  *   put:
  *     summary: Update a blog post by ID
@@ -373,43 +339,6 @@
  *                   type: string
  *                   example: "Blog post not found"
  */
-
-
-
-/**
- * @swagger
- * /api/blog/comment/:id:
- *   put:
- *     tags:
- *       - Blog
- *     summary: This end point help to add comment to created blog 
- *     consumes:
- *       - multipart/form-data
- *     requestBody:
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               id:
- *                 type: string
- *                 description: comment added to blog
- *               comment:
- *                 type: string
- *                 description: comment added to blog
- *           required:
- *             - comment
- *     responses:
- *       200:
- *         description: comment added successfully
- *       400:
- *         description: Bad request
- *       500:
- *         description: Internal server error
- *       404: 
- *          description: Blog not found
- */
-
 
 
 
@@ -475,13 +404,15 @@
  */
 
 
+
+
 /**
  * @swagger
  * /api/blog/comment/{id}:
- *   put:
+ *   post:
  *     summary: Update the user's data
  *     tags:
- *       - Blog
+ *       - User
  *     parameters:
  *       - in: path
  *         name: id

@@ -33,13 +33,10 @@ const blogSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    author:{
+    author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
-    },
-    authorP:{
-        type: String,
-        require: true
+        ref: 'users', // Reference the 'users' model for comment author
+        required: true,
     },
     blogImage:{
         type: String,
