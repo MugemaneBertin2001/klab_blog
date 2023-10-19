@@ -19,6 +19,9 @@
 
 
 
+
+
+
 // Get all blogs
 /**
  * @swagger
@@ -37,6 +40,67 @@
  *       500:
  *         description: Internal server error
  */
+
+
+//Select one blog
+/**
+ * @swagger
+ * /api/blog/selectById/{id}:
+ *   get:
+ *     summary: Delete a blog post by ID
+ *     tags:
+ *       - Blog
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Blog ID to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Blog post deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "200"
+ *                 message:
+ *                   type: string
+ *                   example: "Blog post deleted successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     bogImage:
+ *                       type: string
+ *                       example: http://example.com/blog_image.jpg
+ *                     blogTitle:
+ *                       type: string
+ *                       example: "Title of the Blog"
+ *                     blogContent:
+ *                       type: string
+ *                       example: "Content of the blog post"
+ *       404:
+ *         description: Blog post not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "404"
+ *                 message:
+ *                   type: string
+ *                   example: "Blog post not found"
+ */
+
+
+
+
 
 // Delete blog by Id
 
@@ -414,7 +478,7 @@
 /**
  * @swagger
  * /api/blog/comment/{id}:
- *   post:
+ *   put:
  *     summary: Update the user's data
  *     tags:
  *       - Blog
