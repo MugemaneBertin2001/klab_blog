@@ -47,7 +47,7 @@ export const createBlog = async (req,res) => {
 
 export const selectBlog = async (req, res) => {
     try {
-      const getBlog = await blog.find().populate({path:'comments', populate:{path:'author',select:'first lastname'}}).populate({path:'author', select: 'first lastname profile'});
+      const getBlog = await blog.find().populate({path:'comments', populate:{path:'author',select:'first lastname profile email'}}).populate({path:'author', select: 'first lastname profile'});
       return res.status(200).json({
         status: "Success",
         message: "Data Retrieved Successfully",
