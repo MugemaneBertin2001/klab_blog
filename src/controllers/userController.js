@@ -1,4 +1,4 @@
-import users from "../model/userModel";
+import users from "../Model/userModel";
 import {uploadToCloud} from "../helper/cloud";
 import jwt from "jsonwebtoken";
 import bcrypt, {gensalt, hash} from "bcrypt";
