@@ -69,7 +69,7 @@ export const signup = async (req,res) => {
 
 export const userLogin = async (req, res) =>{
     try {
-// Validate the request body
+// Validate the request body of forms
 if ( !req.body.email || !req.body.password) {
     return res.status(400).json({
         status: "400",
