@@ -6,9 +6,9 @@ import { Comment } from "../Model/postModel";
 
 export const createpost = async (req,res) => {
     try{
-        const {title,subheader,content,postImage} = req.body;
+        const {title,content,postImage} = req.body;
          // Validate the request body
-         if (!title || !subheader || !content || !postImage) {
+         if (!title || !content ) {
             return res.status(400).json({
                 status: "400",
                 message: "Missing required fields in the request body",
@@ -30,7 +30,6 @@ export const createpost = async (req,res) => {
     
         const newpost = await post.create({
             title,
-            subheader,
             content,
             postImage: result?.secure_url,
             author:req.users._id
@@ -92,14 +91,6 @@ export const deletepost = async (req,res) => {
     try{
         const {id} = req.params
 
-        // Validate the 'id' parameter
-        if (!id) {
-            return res.status(400).json({
-                status: "400",
-                message: "Missing 'id' parameter in the request",
-            });
-        }
-
         const checkId = await post.findById(id);
         if(!checkId){
             return  res.status(404).json({
@@ -130,12 +121,6 @@ export const selectById = async (req,res) => {
     try{
 
         // Validate the 'id' parameter
-        if (!id) {
-            return res.status(400).json({
-                status: "400",
-                message: "Missing 'id' parameter in the request",
-            });
-        }
 
         const {id} = req.params
         const checkId = await post.findById(id).populate({path:'comments', select: 'content author'});
@@ -168,15 +153,7 @@ export const updatepost = async(req,res) => {
     try{
         const {id} = req.params;
 
-        // Validate the 'id' parameter
-        if (!id) {
-            return res.status(400).json({
-                status: "400",
-                message: "Missing 'id' parameter in the request",
-            });
-        }
-
-        const {title,subheader,content,postImage} = req.body;
+        const {title,content,postImage} = req.body;
         const checkId = await post.findById(id);
         if(!checkId){
             return res.status(404).json({
@@ -188,7 +165,6 @@ export const updatepost = async(req,res) => {
     
         const updateB = await post.findByIdAndUpdate(id,{
             title,
-            subheader,
             content,
             postImage: result?.secure_url,
 

@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const commentSchema = new mongoose.Schema({
-    blogId: {
+    postId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'blog',
         required:true
