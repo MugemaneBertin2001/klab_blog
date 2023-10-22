@@ -123,7 +123,7 @@ export const selectById = async (req,res) => {
         // Validate the 'id' parameter
 
         const {id} = req.params
-        const checkId = await post.findById(id).populate({path:'comments', select: 'content author'});
+        const checkId = await post.findById(id).populate({path:'comments', populate:{path:'author',select:'first lastname profile email'}}).populate({path:'author', select: 'first lastname profile'});
         if(!checkId){
             return  res.status(404).json({
                 message:"post Not Found!"
