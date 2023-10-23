@@ -157,8 +157,17 @@ export const updateUser = async(req,res) => {
         }
         let result;
         if(req.file) result = await uploadToCloud(req.file,res);
-        const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(password, salt);
+
+            if(password){ 
+                console.log("password available")
+            } else {
+                console.log("password not available")
+            }
+                
+                const salt = await bcrypt.genSalt(10);
+                const hashedPass = await bcrypt.hash(password, salt);
+           
+        
         const updateU = await users.findByIdAndUpdate(id,{
             first,
             lastname,

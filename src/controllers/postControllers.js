@@ -169,7 +169,7 @@ export const updatepost = async(req,res) => {
 
         if(checkTitle._id != id){
             return res.status(404).json({
-                message: "Title already exist please try ither"
+                message: "Title already exist please try other"
             })
         }
     }
