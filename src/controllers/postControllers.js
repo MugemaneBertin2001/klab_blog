@@ -162,7 +162,17 @@ export const updatepost = async(req,res) => {
         }
         let result;
         if(req.file) result = await uploadToCloud(req.file,res);
-    
+
+        const checkTitle = await post.findOne({title:title});
+
+        if(checkTitle){
+
+        if(checkTitle._id != id){
+            return res.status(404).json({
+                message: "Title already exist please try ither"
+            })
+        }
+    }
         const updateB = await post.findByIdAndUpdate(id,{
             title,
             content,
