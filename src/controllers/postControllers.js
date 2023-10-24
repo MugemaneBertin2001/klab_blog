@@ -124,11 +124,17 @@ export const selectById = async (req,res) => {
 
         const {id} = req.params
         const checkId = await post.findById(id).populate({path:'comments', populate:{path:'author',select:'first lastname profile email'}}).populate({path:'author', select: 'first lastname profile'});
+        
         if(!checkId){
             return  res.status(404).json({
                 message:"post Not Found!"
             })
         }
+
+        const addView = await post.findOneAndUpdate({_id:id},{
+            $inc:{views:1}
+        },
+        )
         return res.status(200).json({
             status : "sucess",
             message : "data retrieved successfully",
@@ -241,3 +247,37 @@ export const addComment = async (req,res) =>{
           error: error.message,
         });
 }} 
+
+
+
+//DElete the comment
+
+export const deleteComment = async (req,res) => {
+    try{
+        const {id} = req.params
+
+        const checkId = await Comment.findById(id);
+        if(!checkId){
+            return  res.status(404).json({
+                message:"Id Not Found!"
+            })
+        }
+        const deleteC = await Comment.deleteMany({postId:id})
+        const deleteB = await Comment.findByIdAndDelete(id);
+        return res.status(200).json({
+            status : "sucess",
+            message : "data deleted successfully",
+            data : deleteB
+
+        })
+
+    }
+    catch(error){
+        return res.status(500).json({
+            status : "failed",
+            message : "Failed To deletee",
+            error: error.message
+        })
+
+    }
+}
