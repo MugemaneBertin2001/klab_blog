@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const commentSchema = new mongoose.Schema({
-    blogId: {
+    postId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'blog',
         required:true
@@ -25,10 +25,6 @@ const blogSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    subheader:{
-        type: String,
-        require: true
-    },
     content:{
         type: String,
         require: true
@@ -38,7 +34,7 @@ const blogSchema = new mongoose.Schema({
         ref: 'users', // Reference the 'users' model for comment author
         required: true,
     },
-    blogImage:{
+    postImage:{
         type: String,
         require: true
     },

@@ -69,7 +69,7 @@ export const signup = async (req,res) => {
 
 export const userLogin = async (req, res) =>{
     try {
-// Validate the request body
+// Validate the request body of forms
 if ( !req.body.email || !req.body.password) {
     return res.status(400).json({
         status: "400",
@@ -155,10 +155,24 @@ export const updateUser = async(req,res) => {
                 message: "user not found"
             })
         }
+
+        const checkEmail = await users.findOne({email:email});
+        if(checkEmail){
+            if(checkEmail._id._id != id){
+                return res.status(409).json({
+                    message: "Email already exist try other"
+                })
+            }
+        }
+
         let result;
         if(req.file) result = await uploadToCloud(req.file,res);
-        const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(password, salt);
+
+            if(password){ 
+                const salt = await bcrypt.genSalt(10);
+                const hashedPass = await bcrypt.hash(password, salt);
+           
+        
         const updateU = await users.findByIdAndUpdate(id,{
             first,
             lastname,
@@ -167,12 +181,29 @@ export const updateUser = async(req,res) => {
             profile: result?.secure_url,
             role
         });
+
         return res.status(200).json({
             status:"success",
             message: "user updated successfully",
             data:updateU
 
         })
+            } else {
+                const updateU = await users.findByIdAndUpdate(id,{
+                    first,
+                    lastname,
+                    email,
+                    profile: result?.secure_url,
+                    role
+                });
+
+                return res.status(200).json({
+                    status:"success",
+                    message: "user updated successfully",
+                    data:updateU
+        
+                })
+            }
     }
     catch(error){
         return res.status(500).json({

@@ -266,8 +266,6 @@
  *             properties:
  *               title:
  *                 type: string
- *               subheader:
- *                 type: string
  *               content:
  *                 type: string
  *               postImage:
@@ -303,8 +301,6 @@
  *             type: object
  *             properties:
  *               title:
- *                 type: string
- *               subheader:
  *                 type: string
  *               content:
  *                 type: string
