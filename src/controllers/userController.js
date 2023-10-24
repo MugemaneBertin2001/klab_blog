@@ -155,15 +155,20 @@ export const updateUser = async(req,res) => {
                 message: "user not found"
             })
         }
+
+        const checkEmail = await users.findOne({email:email});
+        if(checkEmail){
+            if(checkEmail._id._id != id){
+                return res.status(409).json({
+                    message: "Email already exist try other"
+                })
+            }
+        }
+
         let result;
         if(req.file) result = await uploadToCloud(req.file,res);
 
             if(password){ 
-                console.log("password available")
-            } else {
-                console.log("password not available")
-            }
-                
                 const salt = await bcrypt.genSalt(10);
                 const hashedPass = await bcrypt.hash(password, salt);
            
@@ -176,12 +181,29 @@ export const updateUser = async(req,res) => {
             profile: result?.secure_url,
             role
         });
+
         return res.status(200).json({
             status:"success",
             message: "user updated successfully",
             data:updateU
 
         })
+            } else {
+                const updateU = await users.findByIdAndUpdate(id,{
+                    first,
+                    lastname,
+                    email,
+                    profile: result?.secure_url,
+                    role
+                });
+
+                return res.status(200).json({
+                    status:"success",
+                    message: "user updated successfully",
+                    data:updateU
+        
+                })
+            }
     }
     catch(error){
         return res.status(500).json({
