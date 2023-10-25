@@ -43,7 +43,11 @@ const blogSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'comments',
         },
-    ]
+    ],
+    views:{
+        type: Number,
+        default: 0
+    }
 });
 
 

@@ -10,6 +10,7 @@ postRoutes.post("/create",Authorization, fileUpload.single("postImage"), createp
 postRoutes.get("/select", selectpost);
 postRoutes.get("/selectById/:id", selectById);
 postRoutes.delete("/delete/:id",Authorization, deletepost);
+postRoutes.delete("/deleteComment/:id",Authorization, deletepost);
 postRoutes.put("/update/:id",Authorization,fileUpload.single("postImage"), updatepost );
 postRoutes.post("/comment/:id",userAunthentication, fileUpload.single("postImage"), addComment);
 // postRoutes.get("/getComment/:id", getComments);
