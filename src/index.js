@@ -2,7 +2,7 @@ import app from "./app";
 import mongoose from "mongoose";
 
 mongoose.set("strictQuery", false)
-mongoose.connect(process.env.dbConnection)
+mongoose.connect(process.env.DB_URL)
     .then(()=>{
         console.log("Db Connection Well");
     })
